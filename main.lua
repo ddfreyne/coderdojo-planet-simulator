@@ -52,8 +52,8 @@ function love.update(delta)
 		for indexB, planetB in ipairs(planets) do
 			if indexA ~= indexB then
 				local d = distance(planetA.X, planetA.Y, planetB.X, planetB.Y)
-				local unitX = (planetA.X - planetB.X) / math.abs(planetA.X - planetB.X)
-				local unitY = (planetA.Y - planetB.Y) / math.abs(planetA.Y - planetB.Y)
+				local unitX = (planetA.X - planetB.X) / d
+				local unitY = (planetA.Y - planetB.Y) / d
 				planetA.AccelX = - 1200 * planetB.Mass / (d * d) * unitX
 				planetA.AccelY = - 1200 * planetB.Mass / (d * d) * unitY
 			end
