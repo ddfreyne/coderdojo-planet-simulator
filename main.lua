@@ -1,40 +1,58 @@
-local bigX = love.window.getWidth()/2
-local bigY = love.window.getHeight()/2
-local bigVelX = 0
-local bigVelY = 0
-local bigAccelX = 0
-local bigAccelY = 0
-local bigMass = 2000
-
-local smallX = 600
-local smallY = 300
-local smallVelX = 0
-local smallVelY = -120
-local smallAccelX = 0
-local smallAccelY = 0
-local smallMass = 100
+local planets = {}
 
 function distance(x1, y1, x2 ,y2)
 	return math.sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2))
 end
 
-function love.draw()
-	love.graphics.setColor(255, 0, 0)
-	love.graphics.circle('fill', bigX, bigY, 100, 50)
+function love.load()
+	table.insert(planets, {
+		X      = 600,
+		Y      = 300,
+		Radius = 10,
+		VelX   = 0,
+		VelY   = -120,
+		AccelX = 0,
+		AccelY = 0,
+		Mass   = 100,
+		Color  = {0, 255, 0}
+	})
+	table.insert(planets, {
+		X      = 400,
+		Y      = 290,
+		Radius = 100,
+		VelX   = 0,
+		VelY   = 0,
+		AccelX = 0,
+		AccelY = 0,
+		Mass   = 2000,
+		Color  = {255, 0, 0}
+	})
+end
 
-	love.graphics.setColor(0, 255, 0)
-	love.graphics.circle('fill', smallX, smallY, 10, 50)
+function love.draw()
+	for _, planet in ipairs(planets) do
+		love.graphics.setColor(planet.Color[1], planet.Color[2], planet.Color[3])
+		love.graphics.circle('fill', planet.X, planet.Y, planet.Radius, 50)
+	end
 end
 
 function love.update(delta)
-	smallY = smallY + smallVelY * delta
-	smallX = smallX + smallVelX * delta
-	smallVelX = smallVelX + smallAccelX * delta
-	smallVelY = smallVelY + smallAccelY * delta
+	for indexA, planetA in ipairs(planets) do
+		for indexB, planetB in ipairs(planets) do
+			if indexA ~= indexB then
+				local d = distance(planetA.X, planetA.Y, planetB.X, planetB.Y)
+				local unitX = (planetA.X - planetB.X) / math.abs(planetA.X - planetB.X)
+				local unitY = (planetA.Y - planetB.Y) / math.abs(planetA.Y - planetB.Y)
+				planetA.AccelX = - 1200 * planetB.Mass / (d * d) * unitX
+				planetA.AccelY = - 1200 * planetB.Mass / (d * d) * unitY
+			end
+		end
+	end
 
-	local d = distance(smallX, smallY, bigX, bigY)
-	local unitX = (smallX - bigX) / math.abs(smallX - bigX)
-	local unitY = (smallY - bigY) / math.abs(smallY - bigY)
-	smallAccelX = - 1200 * bigMass / (d * d) * unitX
-	smallAccelY = - 1200 * bigMass / (d * d) * unitY
+	for _, planet in ipairs(planets) do
+		planet.VelX = planet.VelX + planet.AccelX * delta
+		planet.VelY = planet.VelY + planet.AccelY * delta
+		planet.Y = planet.Y + planet.VelY * delta
+		planet.X = planet.X + planet.VelX * delta
+	end
 end
