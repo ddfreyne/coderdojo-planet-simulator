@@ -9,7 +9,7 @@ local bigMass = 2000
 local smallX = 600
 local smallY = 300
 local smallVelX = 0
-local smallVelY = 0
+local smallVelY = -120
 local smallAccelX = 0
 local smallAccelY = 0
 local smallMass = 100
@@ -29,6 +29,12 @@ end
 function love.update(delta)
 	smallY = smallY + smallVelY * delta
 	smallX = smallX + smallVelX * delta
-	smallVelX = smallVelX + smallAccelX*delta
-	smallVelY = smallVelY + smallAccelY*delta
+	smallVelX = smallVelX + smallAccelX * delta
+	smallVelY = smallVelY + smallAccelY * delta
+
+	local d = distance(smallX, smallY, bigX, bigY)
+	local unitX = (smallX - bigX) / math.abs(smallX - bigX)
+	local unitY = (smallY - bigY) / math.abs(smallY - bigY)
+	smallAccelX = - 1200 * bigMass / (d * d) * unitX
+	smallAccelY = - 1200 * bigMass / (d * d) * unitY
 end
