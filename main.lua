@@ -6,8 +6,8 @@ end
 
 function love.load()
 	table.insert(planets, {
-		pos    = { x = 600, y = 290 },
-		Radius = 10,
+		pos    = { x = 600, y = 300 },
+		radius = 10,
 		VelX   = 0,
 		VelY   = -120,
 		AccelX = 0,
@@ -17,7 +17,7 @@ function love.load()
 	})
 	table.insert(planets, {
 		pos    = { x = 200, y = 310 },
-		Radius = 10,
+		radius = 10,
 		VelX   = 0,
 		VelY   = 120,
 		AccelX = 0,
@@ -27,7 +27,7 @@ function love.load()
 	})
 	table.insert(planets, {
 		pos    = { x = 400, y = 300 },
-		Radius = 40,
+		radius = 40,
 		VelX   = 0,
 		VelY   = 0,
 		AccelX = 0,
@@ -40,7 +40,7 @@ end
 function love.draw()
 	for _, planet in ipairs(planets) do
 		love.graphics.setColor(planet.Color[1], planet.Color[2], planet.Color[3])
-		love.graphics.circle('fill', planet.pos.x, planet.pos.y, planet.Radius, 50)
+		love.graphics.circle('fill', planet.pos.x, planet.pos.y, planet.radius, 50)
 	end
 end
 
