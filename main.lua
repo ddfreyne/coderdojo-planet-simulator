@@ -4,6 +4,14 @@ function distance(a, b)
 	return math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
 end
 
+function unitVector(a, b)
+	local d = distance(a, b)
+	return {
+		x = (a.x - b.x) / d,
+		y = (a.y - b.y) / d
+	}
+end
+
 function love.load()
 	table.insert(planets, {
 		pos    = { x = 600, y = 300 },
@@ -43,10 +51,9 @@ function love.update(delta)
 		for indexB, planetB in ipairs(planets) do
 			if indexA ~= indexB then
 				local d = distance(planetA.pos, planetB.pos)
-				local unitX = (planetA.pos.x - planetB.pos.x) / d
-				local unitY = (planetA.pos.y - planetB.pos.y) / d
-				planetA.accel.x = - 1200 * planetB.Mass / (d * d) * unitX
-				planetA.accel.y = - 1200 * planetB.Mass / (d * d) * unitY
+				local unit = unitVector(planetA.pos, planetB.pos)
+				planetA.accel.x = - 1200 * planetB.Mass / (d * d) * unit.x
+				planetA.accel.y = - 1200 * planetB.Mass / (d * d) * unit.y
 			end
 		end
 	end
