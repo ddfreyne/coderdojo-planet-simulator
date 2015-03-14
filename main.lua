@@ -8,8 +8,7 @@ function love.load()
 	table.insert(planets, {
 		pos    = { x = 600, y = 300 },
 		radius = 10,
-		VelX   = 0,
-		VelY   = -120,
+		vel    = { x = 0, y = -120 },
 		AccelX = 0,
 		AccelY = 0,
 		Mass   = 10,
@@ -18,8 +17,7 @@ function love.load()
 	table.insert(planets, {
 		pos    = { x = 200, y = 310 },
 		radius = 10,
-		VelX   = 0,
-		VelY   = 120,
+		vel    = { x = 0, y = 120 },
 		AccelX = 0,
 		AccelY = 0,
 		Mass   = 10,
@@ -28,8 +26,7 @@ function love.load()
 	table.insert(planets, {
 		pos    = { x = 400, y = 300 },
 		radius = 40,
-		VelX   = 0,
-		VelY   = 0,
+		vel    = { x = 0, y = 0 },
 		AccelX = 0,
 		AccelY = 0,
 		Mass   = 4000,
@@ -58,9 +55,9 @@ function love.update(delta)
 	end
 
 	for _, planet in ipairs(planets) do
-		planet.VelX = planet.VelX + planet.AccelX * delta
-		planet.VelY = planet.VelY + planet.AccelY * delta
-		planet.pos.x = planet.pos.x + planet.VelX * delta
-		planet.pos.y = planet.pos.y + planet.VelY * delta
+		planet.vel.x = planet.vel.x + planet.AccelX * delta
+		planet.vel.y = planet.vel.y + planet.AccelY * delta
+		planet.pos.x = planet.pos.x + planet.vel.x * delta
+		planet.pos.y = planet.pos.y + planet.vel.y * delta
 	end
 end
