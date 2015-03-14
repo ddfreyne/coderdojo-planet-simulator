@@ -17,9 +17,20 @@ function love.load()
 		Color  = {0, 255, 0}
 	})
 	table.insert(planets, {
+		X      = 200,
+		Y      = 300,
+		Radius = 10,
+		VelX   = 0,
+		VelY   = 120,
+		AccelX = 0,
+		AccelY = 0,
+		Mass   = 100,
+		Color  = {0, 0, 255}
+	})
+	table.insert(planets, {
 		X      = 400,
 		Y      = 290,
-		Radius = 100,
+		Radius = 40,
 		VelX   = 0,
 		VelY   = 0,
 		AccelX = 0,
