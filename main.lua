@@ -1,7 +1,7 @@
 local planets = {}
 
-function distance(x1, y1, x2 ,y2)
-	return math.sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2))
+function distance(a, b)
+	return math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
 end
 
 function love.load()
@@ -48,7 +48,7 @@ function love.update(delta)
 	for indexA, planetA in ipairs(planets) do
 		for indexB, planetB in ipairs(planets) do
 			if indexA ~= indexB then
-				local d = distance(planetA.pos.x, planetA.pos.y, planetB.pos.x, planetB.pos.y)
+				local d = distance(planetA.pos, planetB.pos)
 				local unitX = (planetA.pos.x - planetB.pos.x) / d
 				local unitY = (planetA.pos.y - planetB.pos.y) / d
 				planetA.AccelX = - 1200 * planetB.Mass / (d * d) * unitX
