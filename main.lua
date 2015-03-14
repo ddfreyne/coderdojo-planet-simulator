@@ -9,8 +9,7 @@ function love.load()
 		pos    = { x = 600, y = 300 },
 		radius = 10,
 		vel    = { x = 0, y = -120 },
-		AccelX = 0,
-		AccelY = 0,
+		accel  = { x = 0, y = 0 },
 		Mass   = 10,
 		Color  = {0, 255, 0}
 	})
@@ -18,8 +17,7 @@ function love.load()
 		pos    = { x = 200, y = 310 },
 		radius = 10,
 		vel    = { x = 0, y = 120 },
-		AccelX = 0,
-		AccelY = 0,
+		accel  = { x = 0, y = 0 },
 		Mass   = 10,
 		Color  = {0, 0, 255}
 	})
@@ -27,8 +25,7 @@ function love.load()
 		pos    = { x = 400, y = 300 },
 		radius = 40,
 		vel    = { x = 0, y = 0 },
-		AccelX = 0,
-		AccelY = 0,
+		accel  = { x = 0, y = 0 },
 		Mass   = 4000,
 		Color  = {255, 0, 0}
 	})
@@ -48,15 +45,15 @@ function love.update(delta)
 				local d = distance(planetA.pos, planetB.pos)
 				local unitX = (planetA.pos.x - planetB.pos.x) / d
 				local unitY = (planetA.pos.y - planetB.pos.y) / d
-				planetA.AccelX = - 1200 * planetB.Mass / (d * d) * unitX
-				planetA.AccelY = - 1200 * planetB.Mass / (d * d) * unitY
+				planetA.accel.x = - 1200 * planetB.Mass / (d * d) * unitX
+				planetA.accel.y = - 1200 * planetB.Mass / (d * d) * unitY
 			end
 		end
 	end
 
 	for _, planet in ipairs(planets) do
-		planet.vel.x = planet.vel.x + planet.AccelX * delta
-		planet.vel.y = planet.vel.y + planet.AccelY * delta
+		planet.vel.x = planet.vel.x + planet.accel.x * delta
+		planet.vel.y = planet.vel.y + planet.accel.y * delta
 		planet.pos.x = planet.pos.x + planet.vel.x * delta
 		planet.pos.y = planet.pos.y + planet.vel.y * delta
 	end
