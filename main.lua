@@ -18,7 +18,7 @@ function love.load()
 	})
 	table.insert(planets, {
 		X      = 200,
-		Y      = 300,
+		Y      = 310,
 		Radius = 10,
 		VelX   = 0,
 		VelY   = 120,
