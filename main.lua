@@ -7,13 +7,13 @@ end
 function love.load()
 	table.insert(planets, {
 		X      = 600,
-		Y      = 300,
+		Y      = 290,
 		Radius = 10,
 		VelX   = 0,
 		VelY   = -120,
 		AccelX = 0,
 		AccelY = 0,
-		Mass   = 100,
+		Mass   = 10,
 		Color  = {0, 255, 0}
 	})
 	table.insert(planets, {
@@ -24,18 +24,18 @@ function love.load()
 		VelY   = 120,
 		AccelX = 0,
 		AccelY = 0,
-		Mass   = 100,
+		Mass   = 10,
 		Color  = {0, 0, 255}
 	})
 	table.insert(planets, {
 		X      = 400,
-		Y      = 290,
+		Y      = 300,
 		Radius = 40,
 		VelX   = 0,
 		VelY   = 0,
 		AccelX = 0,
 		AccelY = 0,
-		Mass   = 2000,
+		Mass   = 4000,
 		Color  = {255, 0, 0}
 	})
 end
