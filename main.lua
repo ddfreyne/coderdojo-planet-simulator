@@ -14,6 +14,10 @@ local smallAccelX = 0
 local smallAccelY = 0
 local smallMass = 100
 
+function distance(x1, y1, x2 ,y2)
+	return math.sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2))
+end
+
 function love.draw()
 	love.graphics.setColor(255, 0, 0)
 	love.graphics.circle('fill', bigX, bigY, 100, 50)
