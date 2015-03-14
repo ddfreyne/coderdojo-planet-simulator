@@ -23,5 +23,8 @@ function love.draw()
 end
 
 function love.update(delta)
-	smallY = smallY - 1
+	smallY = smallY + smallVelY * delta
+	smallX = smallX + smallVelX * delta
+	smallVelX = smallVelX + smallAccelX*delta
+	smallVelY = smallVelY + smallAccelY*delta
 end
